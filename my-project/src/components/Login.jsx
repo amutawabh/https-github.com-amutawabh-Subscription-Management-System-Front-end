@@ -12,11 +12,15 @@ const Login = () => {
         username,
         password,
       });
-      localStorage.setItem("token", response.data.token); // حفظ التوكن
-      alert("Login successful");
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token); // حفظ التوكن
+        alert("Login successful");
+      } else {
+        alert("Failed to retrieve token");
+      }
     } catch (error) {
       console.error(error);
-      alert(error.response.data.message || "An error occurred");
+      alert(error.response?.data?.message || "An error occurred");
     }
   };
 

@@ -8,8 +8,12 @@ const Subscriptions = () => {
     const fetchSubscriptions = async () => {
       try {
         const token = localStorage.getItem("token");
+        if (!token) {
+          console.error("No token found");
+          return;
+        }
         const response = await axios.get("/subscriptions", {
-          headers: { Authorization: token },
+          headers: { Authorization: `Bearer ${token}` }, // صيغة التوكن المرسل
         });
         setSubscriptions(response.data);
       } catch (error) {
